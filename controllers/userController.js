@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
 const userLogin = async (req , res) =>
 {
     const {email , pass } = req.body;
-    console.log(email.pass);
+    console.log(email,pass);
     try {
         // check if user is in data base or no 
         const user = await userModel.findOne({ email });
