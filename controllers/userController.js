@@ -40,8 +40,8 @@ const registerUser = async (req, res) => {
 
 const userLogin = async (req , res) =>
 {
-    const {email , pass } = req.body;
-    console.log(email,pass);
+    const {email , password } = req.body;
+    console.log(email,password );
     try {
         // check if user is in data base or no 
         const user = await userModel.findOne({ email });
