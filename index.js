@@ -14,7 +14,7 @@ let url = process.env.ATLAS_URI;
 
 // ✅ Use CORS Middleware (Must Be First!)
 app.use(cors({
-    origin: 'https://studious-goldfish-9pwrwvp777x3qqq-5174.app.github.dev', // Allow frontend domain
+    origin: 'https://messaging-ms.vercel.app/', // Allow frontend domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
@@ -22,7 +22,7 @@ app.use(cors({
 
 // ✅ Manually Handle Preflight Requests (OPTIONS)
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://studious-goldfish-9pwrwvp777x3qqq-5174.app.github.dev');
+    res.header('Access-Control-Allow-Origin', 'https://messaging-ms.vercel.app/');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
