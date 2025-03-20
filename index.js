@@ -12,26 +12,20 @@ const app = express();
 let port = process.env.PORT || 5000;
 let url = process.env.ATLAS_URI;
 
-// ✅ Use CORS Middleware (Must Be First!)
 app.use(cors({
-    origin: 'https://messaging-ms.vercel.app/', // Allow frontend domain
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
 }));
 
-// ✅ Manually Handle Preflight Requests (OPTIONS)
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://messaging-ms.vercel.app/');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+// ✅ Handle Preflight Requests Properly
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Credentials', 'true');
-
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(204); // ✅ Respond to preflight with "No Content"
-    }
-
-    next();
+    res.sendStatus(204);
 });
 
 app.use(express.urlencoded({ extended: true }));
